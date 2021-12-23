@@ -1,0 +1,69 @@
+// pattern: 02
+// pattern name: Абстрактная фабрика (Abstract factory)
+// pattern type: порождающий
+// pattern shortcat: AFьс
+
+		       
+		       
+package AbstractFactory;
+
+
+// Швец стр 85
+/* Абстрактная фабрика - порождающий паттерн проектрирования, который позволяет
+   создавать семейства связанных объектов, не привязываясь к конкретным классам
+   создваываемых объектов.
+ */
+   
+public class AbstractFactory {
+    public static void main (String [] args) {
+	System.out.println("Pattern: Abstract Factory");
+
+	
+    }
+}
+
+//----------------------------------------------------------------
+
+abstract class AbstractClass {
+    public void method_T() {
+	// это трудяга - основаная логика прикладной программы
+    }
+}
+
+
+interface AbstractFactoryI {
+    AbstractClass method_Na();
+}
+
+
+class ClassD_Client {
+    //
+
+    AbstractFactoryI fi;
+
+    void method_Pi (AbstractFactoryI pi) {
+	fi = pi;
+    }
+     
+    void method_W () {
+	// метод, неизменяемость
+	AbstractClass fa = fi.method_Na();
+
+	fa.method_T();
+    }
+}
+
+
+class ClassOfA {
+    // класс - реализатор прикладной логики 
+    public void method_T() {
+	System.out.println ("Прикладная логика");
+    }
+}
+
+
+class ClassOfI {
+    //
+    AbstractClass method_Na () {
+       AbstractFactory.ClassOfA  = new ClassOfA();
+        return ZZZZ
