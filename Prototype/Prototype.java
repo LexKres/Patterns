@@ -25,6 +25,18 @@ public class Prototype {
 
 	System.out.println(s2copy.getdataField2());
 	System.out.println(s2copy.getnumberOfS2());
+
+
+	S11 s11 = new S11(null);
+	S11 s11copy = new S11(s11);
+
+	System.out.println(s11.getdataField1());
+	System.out.println(s11.getnumberOfS1());
+	System.out.println(s11.getsecondValue());
+
+        System.out.println(s11copy.getdataField1());
+	System.out.println(s11copy.getnumberOfS1());
+	System.out.println(s11copy.getsecondValue());
 	
     }
 }
@@ -52,7 +64,10 @@ class S1 extends APrototype {
     String dataField1="S1 dataField";
     int numberOfS1 = 1;
 
-    S1 (S1 source) {
+    
+    public S1() {};
+    
+    public S1(S1 source) {
 	if (source != null) {
 	   this.dataField1 = source.dataField1;
 	   this.numberOfS1 = source.numberOfS1 + 1;
@@ -60,7 +75,7 @@ class S1 extends APrototype {
     }
 
     public S1 clone () {
-	return new S1 (this);
+	return new S1(this);
     }
 
     String getdataField1() { return dataField1; }
@@ -72,8 +87,11 @@ class S1 extends APrototype {
 class S2 extends APrototype {
     String anotherData2 = "S2 anotherData2";
     int anotherNumber2 = 0;
+
+
+    public S2() {};
     
-    S2 (S2 source) {
+    public S2(S2 source) {
 	if (source != null) {
 	   this.anotherData2 = source.anotherData2;
 	   this.anotherNumber2 = source.anotherNumber2+10;
@@ -81,15 +99,38 @@ class S2 extends APrototype {
     }
     
     public S2 clone() {
-	return new S2 (this);
+	return new S2(this);
     }
 
     String getdataField2() { return anotherData2; }
 
     int getnumberOfS2() {return anotherNumber2; }
 
-
 }
+
+
+// наслденики от первых двух классов
+
+class S11 extends S1 {
+    int secondValue = 0;
+
+    public S11 (S11 source) {
+        super((S1) this);
+	if (source != null) {
+	    this.secondValue = source.secondValue + 100;
+	}
+    }
+
+    public S11 clone() {
+	return new S11(this);
+    }
+
+    int getsecondValue() { return secondValue; }
+
+}    
+
+
+// реестр объектов
 
 
     
