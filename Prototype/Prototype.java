@@ -14,30 +14,45 @@ public class Prototype {
         S2 s2 = new S2(null);
 	S2 s2copy = new S2(s2);
 
-	System.out.println(s1.getdataField1());
-	System.out.println(s1.getnumberOfS1());
+	System.out.println("s1: " + s1.getdataField1());
+	System.out.println("s1: " + s1.getnumberOfS1());
 
-	System.out.println(s1copy.getdataField1());
-	System.out.println(s1copy.getnumberOfS1());
+	System.out.println("s1copy: " + s1copy.getdataField1());
+	System.out.println("s1copy: " + s1copy.getnumberOfS1());
 	
-	System.out.println(s2.getdataField2());
-	System.out.println(s2.getnumberOfS2());
+        System.out.println("s2: " + s2.getdataField2());
+	System.out.println("s2: " + s2.getnumberOfS2());
 
-	System.out.println(s2copy.getdataField2());
-	System.out.println(s2copy.getnumberOfS2());
+	System.out.println("s2copy: " + s2copy.getdataField2());
+	System.out.println("s2copy: " + s2copy.getnumberOfS2());
 
 
 	S11 s11 = new S11(null);
 	S11 s11copy = new S11(s11);
 
-	System.out.println(s11.getdataField1());
-	System.out.println(s11.getnumberOfS1());
-	System.out.println(s11.getsecondValue());
+	System.out.println("s11: " + s11.getdataField1());
+	System.out.println("s11: " + s11.getnumberOfS1());
+	System.out.println("s11: " + s11.getsecondValue());
 
-        System.out.println(s11copy.getdataField1());
-	System.out.println(s11copy.getnumberOfS1());
-	System.out.println(s11copy.getsecondValue());
+        System.out.println("s11copy: " + s11copy.getdataField1());
+	System.out.println("s11copy: " + s11copy.getnumberOfS1());
+	System.out.println("s11copy: " + s11copy.getsecondValue());
+
+        
+        System.out.println("--------------------- now work with registry --------------");
 	
+        PrototypeRegistry protRegistry = new PrototypeRegistry();
+
+	protRegistry.addItem(s1);
+	protRegistry.addItem(s2);
+	protRegistry.addItem(s1copy);
+	protRegistry.addItem(s2copy);
+	protRegistry.addItem(s11);
+
+	//for(int j=0; j<protRegistry.items.length; j++) {
+	//    protRegistry[j]
+	
+
     }
 }
 
@@ -109,13 +124,13 @@ class S2 extends APrototype {
 }
 
 
-// наслденики от первых двух классов
+// наследники от первых двух классов
 
 class S11 extends S1 {
     int secondValue = 0;
 
     public S11 (S11 source) {
-        super((S1) this);
+        super((S1) source);
 	if (source != null) {
 	    this.secondValue = source.secondValue + 100;
 	}
@@ -130,7 +145,35 @@ class S11 extends S1 {
 }    
 
 
-// реестр объектов
+// реестр объектов - т.е. хранилище прототипов
 
+class PrototypeRegistry {
+    public APrototype[] items;
+    private int currentItemId;
+    private int maxRegSize=5;
+
+    public PrototypeRegistry () {
+        items = new APrototype[maxRegSize]; 
+        currentItemId = -1;
+    }
+
+    public APrototype getById(int id) {
+	return items[id];
+    }
+
+    public void addItem (APrototype newItem) {
+	currentItemId += 1;
+	if (currentItemId > maxRegSize-1)
+	    currentItemId = maxRegSize-1;
+	else
+	    items[currentItemId] = newItem;
+	;
+
+    }
+
+}
+
+
+	
 
     
