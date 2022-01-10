@@ -2,7 +2,7 @@ package Tests;
 
 public class TestInheritance {
     public static void main (String [] args) {
-        Son son = new Dother();
+      //  Son son = new Dother();
     }
 }
 
